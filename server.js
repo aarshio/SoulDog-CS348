@@ -4,7 +4,7 @@ const port = 3000;
 const db = require("./database/db-config");
 
 app.get("/", (req, res) => {
-  res.send("<h1>Welcome to Soul Dogs </h1>");
+  res.send("<h1>Welcome to SoulDog </h1>");
 });
 
 app.get("/getAllUsers", async (req, res) => {
@@ -18,5 +18,5 @@ app.get("/getAllUsers", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Soul Dogs listening at http://localhost:${port}`);
+  console.log(`SoulDog listening at http://localhost:${port}`);
 });

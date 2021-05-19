@@ -10,7 +10,7 @@ const allUsers = () => {
 const addUser = (user) => {
   return db("users")
     .insert(user)
-    .then((ids) => ({ id: id[0] }));
+    .then((ids) => ({ id: ids[0] }));
 };
 
 module.exports = {
