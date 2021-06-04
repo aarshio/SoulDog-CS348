@@ -7,13 +7,43 @@ const allUsers = () => {
   return db("users");
 };
 
-const addUser = (user) => {
+const getUserById = (id) => {
+  // SELECT * FROM users WHERE id = params.id
   return db("users")
-    .insert(user)
-    .then((ids) => ({ id: ids[0] }));
+    .select()
+    .where({ id: id })
+    .then((user) => user[0]);
+};
+
+const getUserByUsername = (username) => {
+  // SELECT * FROM users WHERE username = params.username
+  return db("users")
+    .select()
+    .where({ username: username })
+    .then((user) => user[0]);
+};
+
+const getUserByEmail = (username) => {
+  // SELECT * FROM users WHERE username = params.username
+  return db("users")
+    .select()
+    .where({ email: email })
+    .then((user) => user[0]);
+};
+
+const addUser = (user) => {
+  return db
+    .insert(
+      [{ email: user.email, username: user.username, password: user.password }],
+      ["id"]
+    )
+    .into("users");
 };
 
 module.exports = {
   allUsers,
   addUser,
+  getUserById,
+  getUserByUsername,
+  getUserByEmail,
 };

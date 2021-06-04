@@ -1,22 +1,31 @@
 const express = require("express");
 const app = express();
-const port = 3000;
-const db = require("./database/db-config");
+const _ = require("lodash");
 
-app.get("/", (req, res) => {
-  res.send("<h1>Welcome to SoulDog </h1>");
+// Our modules
+const middleware = require("./middleware/session");
+const userRoutes = require("./routes/user");
+
+// Middleware
+app.use(middleware);
+
+const isLoggedIn = (req, res, next) => {
+  if (req.user) next();
+  else res.sendStatus(401);
+};
+
+// Routes
+app.get(["/", "/api"], (req, res) => {
+  res.send("<h1>Welcome to SoulDog API</h1>");
 });
 
-app.get("/getAllUsers", async (req, res) => {
-  try {
-    const users = await db.allUsers();
-    return res.status(200).json(users);
-  } catch (err) {
-    console.log("ERROR: ", err);
-    return res.status(400).json(err);
-  }
+app.get("/api/auth", isLoggedIn, (req, res) => {
+  res.send(_.omit(req.user, "password"));
 });
 
-app.listen(port, () => {
-  console.log(`SoulDog listening at http://localhost:${port}`);
+app.use("/api/user", userRoutes);
+
+// Run server
+app.listen((PORT = 5000), () => {
+  console.log(`SoulDog listening at http://localhost:${PORT}`);
 });
