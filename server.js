@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
 const _ = require("lodash");
+const dotenv = require("dotenv");
+
+dotenv.config();
+const PORT = process.env.PORT || 5000;
 
 // Our modules
 const middleware = require("./middleware/session");
@@ -26,6 +30,6 @@ app.get("/api/auth", isLoggedIn, (req, res) => {
 app.use("/api/user", userRoutes);
 
 // Run server
-app.listen((PORT = 5000), () => {
+app.listen(PORT, () => {
   console.log(`SoulDog listening at http://localhost:${PORT}`);
 });
