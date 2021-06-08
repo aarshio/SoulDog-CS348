@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 5000;
 // Our modules
 const middleware = require("./middleware/session");
 const userRoutes = require("./routes/user");
+const petRoutes = require("./routes/pet");
 
 // Middleware
 app.use(middleware);
@@ -28,6 +29,7 @@ app.get("/api/auth", isLoggedIn, (req, res) => {
 });
 
 app.use("/api/user", userRoutes);
+app.use("/api/pet", petRoutes);
 
 // Run server
 app.listen(PORT, () => {

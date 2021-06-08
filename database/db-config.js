@@ -40,10 +40,45 @@ const addUser = (user) => {
     .into("users");
 };
 
+const getAllPets = () => {
+  // SELECT * FROM pets 
+  return db("pets");
+};
+
+const getPetById = (id) => {
+  // SELECT * FROM pets WHERE id = params.id
+  return db("pets")
+    .select()
+    .where({ id: id })
+    .then((pet) => pet[0]);
+};
+
+const addPets = (pet) => {
+  return db
+    .insert(
+      [{ breed: pet.breed, maintenance: pet.maintenance, aggression: pet.aggression, energy: pet.energy }],
+      ["id"]
+    )
+    .into("users");
+};
+
+const getPetsByBreed = (breed) => {
+  // SELECT * FROM users WHERE breed = params.breed
+  return db("pets")
+    .select()
+    .where({ breed: breed })
+    .then((pet) => pet[0]);
+};
+
 module.exports = {
   allUsers,
   addUser,
   getUserById,
   getUserByUsername,
   getUserByEmail,
+
+  getAllPets,
+  getPetById,
+  addPets,
+  getPetsByBreed,
 };
