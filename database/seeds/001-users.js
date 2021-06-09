@@ -17,7 +17,7 @@ const getRandomUser = (hashed_password) => ({
 
 const generateRandomUsers = async (cb) => {
   const fakeUsers = [];
-  const NUM_USERS = 100;
+  const NUM_USERS = 10;
   for (let i = 0; i < NUM_USERS; ++i) {
     await bcrypt.hash(myPlaintextPassword, 1).then(function (hash) {
       const user = getRandomUser(hash);
