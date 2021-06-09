@@ -1,10 +1,15 @@
 exports.up = function (knex) {
   return knex.schema.createTable("posts", function (table) {
     table.uuid("id").notNullable().primary();
-    table.string("title");
-    table.timestamp("created_at").defaultTo(knex.fn.now());
     table.uuid("user_id").notNullable();
     table.foreign("user_id").references("users.id");
+    table.uuid("pet_id").notNullable();
+    table.foreign("pet_id").references("pets.id");
+    table.string("title");
+    table.text("content");
+    table.string("name");
+    table.integer("age");
+    table.timestamp("created_at").defaultTo(knex.fn.now());
   });
 };
 

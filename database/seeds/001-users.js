@@ -39,14 +39,14 @@ const generateRandomUsers = async (cb) => {
 };
 
 exports.seed = function (knex) {
-  return (
-    knex("users")
-      // Deletes ALL existing entries
-      // .del()
-      .then(function () {
-        return generateRandomUsers((fakeUsers) =>
-          knex("users").insert(fakeUsers)
-        );
-      })
-  );
+  // return (
+  //   knex("users")
+  //     // Deletes ALL existing entries
+  //     // .del()
+  //     .then(function () {
+  //       return generateRandomUsers((fakeUsers) =>
+  //         knex("users").insert(fakeUsers)
+  //       );
+  //     })
+  // );
 };

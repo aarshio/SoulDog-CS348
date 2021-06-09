@@ -23,13 +23,13 @@ const generateRandomPets = (cb) => {
 };
 
 exports.seed = function(knex) {
-  return knex('pets')
-    //.del()   // Deletes ALL existing entries
+  // return knex('pets')
+  //   //.del()   // Deletes ALL existing entries
 
-    .then(function () {
-      // Inserts seed entries
-      return generateRandomPets((fakePets) =>
-        knex("pets").insert(fakePets)
-      );
-    });
+  //   .then(function () {
+  //     // Inserts seed entries
+  //     return generateRandomPets((fakePets) =>
+  //       knex("pets").insert(fakePets)
+  //     );
+  //   });
 };
