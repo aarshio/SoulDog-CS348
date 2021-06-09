@@ -45,13 +45,13 @@ const generateRandomPosts = (cb) => {
 };
 
 exports.seed = function (knex) {
-  // Deletes ALL existing entries
-  return knex("posts")
-    // .del()
-    .then(function () {
-      // Inserts seed entries
-      return generateRandomPosts((fakePosts) =>
-        knex("posts").insert(fakePosts)
-      );
-    });
+  // // Deletes ALL existing entries
+  // return knex("posts")
+  //   // .del()
+  //   .then(function () {
+  //     // Inserts seed entries
+  //     return generateRandomPosts((fakePosts) =>
+  //       knex("posts").insert(fakePosts)
+  //     );
+  //   });
 };
