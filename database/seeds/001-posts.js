@@ -9,7 +9,7 @@ exports.seed = function (knex) {
           {
             id: 1,
             title: "Dog1",
-            user_id: "00a5cec6-d0a4-4865-babb-390d232fb756",
+            user_id: "8d5a5d1f-a441-42cf-af6f-788bbb0db145",
           },
         ]);
       })

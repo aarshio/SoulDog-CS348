@@ -7,7 +7,7 @@ const getRandomIndex = (n) => {
 
 const generateRandomPets = (cb) => {
   const fakePets = [];
-  const NUM_PETS = 20;
+  const NUM_PETS = 7;
   const scale = ['Low', 'Medium', 'High'];
   for (let i = 0; i < NUM_PETS; ++i) {
     const pet = {

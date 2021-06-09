@@ -4,6 +4,12 @@ const uuid = require("uuid");
 
 const myPlaintextPassword = "password";
 
+const scale_level = ['Low', 'Medium', 'High'];
+const scale_size = ['Small', 'Medium', 'Large'];
+const getRandomIndex = (n) => {
+  return Math.floor(Math.random() * n); // between 0 to n-1
+}
+
 const getRandomUser = (hashed_password) => ({
   id: uuid.v4(),
   email: faker.internet.email(),
@@ -13,6 +19,11 @@ const getRandomUser = (hashed_password) => ({
   last_name: faker.name.lastName(),
   profile_pic: faker.internet.avatar(),
   age: Math.max(16, Math.round(Math.random() * 100)),
+  bio: faker.lorem.paragraph(),
+  energy: scale_level[getRandomIndex(3)],
+  strength: scale_level[getRandomIndex(3)],
+  free_time: scale_level[getRandomIndex(3)],
+  backyard: scale_size[getRandomIndex(3)],
 });
 
 const generateRandomUsers = async (cb) => {
