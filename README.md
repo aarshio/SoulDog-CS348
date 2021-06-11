@@ -4,6 +4,8 @@
 ## How to run locally
 Before cloning, ensure that you have npm and node installed.
 
+See demo at (it will take some time to load): https://souldog.herokuapp.com/
+
 Upon cloning the repository from [github](https://github.com/aarsh2000/SoulDog), run `npm install` to get all the dependecies.
 To start the app run ```npm start``` and it should begin listening at http://localhost:3000
 ```
