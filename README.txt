@@ -21,6 +21,9 @@ To run migrations we must be within the root directory and run `npx knex migrate
 
 To run seeds and populate the database we run `npx knex seed:run`
 
+Location of test-sample.out is `/SoulDog/database/test-sample.out`
+Location of test-sample.sql is `/SoulDog/database/test-sample.sql`
+
 ## The application provides the following functionalities: 
 
 Creation of an account: users can create an account for themselves so that they may start using the application and its features. On a separate page before entering the application, they will be asked to choose a username and password for their account. 
