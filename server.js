@@ -10,6 +10,10 @@ const PORT = process.env.PORT || 5000;
 const middleware = require("./middleware/session");
 const userRoutes = require("./routes/user");
 const petRoutes = require("./routes/pet");
+const favRoutes = require("./routes/favs");
+const likeRoutes = require("./routes/likes");
+const commentRoutes = require("./routes/comment");
+const postRoutes = require("./routes/posts");
 
 // Middleware
 app.use(middleware);
@@ -30,6 +34,10 @@ app.get("/api/auth", isLoggedIn, (req, res) => {
 
 app.use("/api/user", userRoutes);
 app.use("/api/pet", petRoutes);
+app.use("/api/fav", favRoutes);
+app.use("/api/like", likeRoutes);
+app.use("/api/comment", commentRoutes);
+app.use("/api/post", postRoutes);
 
 // Run server
 app.listen(PORT, () => {

@@ -2,44 +2,44 @@ const express = require("express");
 const app = express.Router();
 const db = require("../database/db-config");
 
-app.get("/getAllPets", async (req, res) => {
+app.get("/getAllPosts", async (req, res) => {
     try {
-      const pets = await db.getAllPets();
+      const posts = await db.getAllPosts();
       res.header("Content-Type", "application/json");
-      return res.send(JSON.stringify(pets, null, 4));
+      return res.send(JSON.stringify(posts, null, 4));
     } catch (err) {
       console.log("ERROR: ", err);
       return res.status(400).send(err);
     }
 });
 
-app.get("/getPetByBreed/:breed", async (req, res) => {
+app.get("/getPostById/:id", async (req, res) => {
   try {
-    const pets = await db.getPetsByBreed(req.params.breed);
+    const posts = await db.getPostById(req.params.id);
     res.header("Content-Type", "application/json");
-    return res.send(JSON.stringify(pets, null, 4));
+    return res.send(JSON.stringify(posts, null, 4));
   } catch (err) {
     console.log("ERROR: ", err);
     return res.status(400).send(err);
   }
 });
 
-app.get("/getPetByID/:id", async (req, res) => {
+app.get("/getPostsByUserId/:id", async (req, res) => {
   try {
-    const pets = await db.getPetById(req.params.id);
+    const posts = await db.getPostsByUserId(req.params.id);
     res.header("Content-Type", "application/json");
-    return res.send(JSON.stringify(pets, null, 4));
+    return res.send(JSON.stringify(posts, null, 4));
   } catch (err) {
     console.log("ERROR: ", err);
     return res.status(400).send(err);
   }
 });
 
-app.get("/getPetsByFeature/:aggression/:energy/:maintenance", async (req, res) => {
+app.get("/getPostByPetId/:id", async (req, res) => {
   try {
-    const pets = await db.getPetsByFeature(req.params.aggression, req.params.energy, req.params.maintenance);
+    const posts = await db.getPostByPetId(req.params.id);
     res.header("Content-Type", "application/json");
-    return res.send(JSON.stringify(pets, null, 4));
+    return res.send(JSON.stringify(posts, null, 4));
   } catch (err) {
     console.log("ERROR: ", err);
     return res.status(400).send(err);
