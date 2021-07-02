@@ -2,44 +2,44 @@ const express = require("express");
 const app = express.Router();
 const db = require("../database/db-config");
 
-app.get("/getAllPets", async (req, res) => {
+app.get("/getAllFavs", async (req, res) => {
     try {
-      const pets = await db.getAllPets();
+      const favs = await db.getAllFavs();
       res.header("Content-Type", "application/json");
-      return res.send(JSON.stringify(pets, null, 4));
+      return res.send(JSON.stringify(favs, null, 4));
     } catch (err) {
       console.log("ERROR: ", err);
       return res.status(400).send(err);
     }
 });
 
-app.get("/getPetByBreed/:breed", async (req, res) => {
+app.get("/getFavById/:id", async (req, res) => {
   try {
-    const pets = await db.getPetsByBreed(req.params.breed);
+    const favs = await db.getFavById(req.params.id);
     res.header("Content-Type", "application/json");
-    return res.send(JSON.stringify(pets, null, 4));
+    return res.send(JSON.stringify(favs, null, 4));
   } catch (err) {
     console.log("ERROR: ", err);
     return res.status(400).send(err);
   }
 });
 
-app.get("/getPetByID/:id", async (req, res) => {
+app.get("/getFavByUserId/:id", async (req, res) => {
   try {
-    const pets = await db.getPetById(req.params.id);
+    const favs = await db.getFavByUserId(req.params.id);
     res.header("Content-Type", "application/json");
-    return res.send(JSON.stringify(pets, null, 4));
+    return res.send(JSON.stringify(favs, null, 4));
   } catch (err) {
     console.log("ERROR: ", err);
     return res.status(400).send(err);
   }
 });
 
-app.get("/getPetsByFeature/:aggression/:energy/:maintenance", async (req, res) => {
+app.get("/getFavByPostId/:id", async (req, res) => {
   try {
-    const pets = await db.getPetsByFeature(req.params.aggression, req.params.energy, req.params.maintenance);
+    const favs = await db.getFavByPostId(req.params.id);
     res.header("Content-Type", "application/json");
-    return res.send(JSON.stringify(pets, null, 4));
+    return res.send(JSON.stringify(favs, null, 4));
   } catch (err) {
     console.log("ERROR: ", err);
     return res.status(400).send(err);

@@ -2,44 +2,44 @@ const express = require("express");
 const app = express.Router();
 const db = require("../database/db-config");
 
-app.get("/getAllPets", async (req, res) => {
+app.get("/getAllComments", async (req, res) => {
     try {
-      const pets = await db.getAllPets();
+      const comments = await db.getAllComments();
       res.header("Content-Type", "application/json");
-      return res.send(JSON.stringify(pets, null, 4));
+      return res.send(JSON.stringify(comments, null, 4));
     } catch (err) {
       console.log("ERROR: ", err);
       return res.status(400).send(err);
     }
 });
 
-app.get("/getPetByBreed/:breed", async (req, res) => {
+app.get("/getCommentsById/:id", async (req, res) => {
   try {
-    const pets = await db.getPetsByBreed(req.params.breed);
+    const comments = await db.getCommentsById(req.params.id);
     res.header("Content-Type", "application/json");
-    return res.send(JSON.stringify(pets, null, 4));
+    return res.send(JSON.stringify(comments, null, 4));
   } catch (err) {
     console.log("ERROR: ", err);
     return res.status(400).send(err);
   }
 });
 
-app.get("/getPetByID/:id", async (req, res) => {
+app.get("/getCommentsByUserId/:id", async (req, res) => {
   try {
-    const pets = await db.getPetById(req.params.id);
+    const comments = await db.getCommentsByUserId(req.params.id);
     res.header("Content-Type", "application/json");
-    return res.send(JSON.stringify(pets, null, 4));
+    return res.send(JSON.stringify(comments, null, 4));
   } catch (err) {
     console.log("ERROR: ", err);
     return res.status(400).send(err);
   }
 });
 
-app.get("/getPetsByFeature/:aggression/:energy/:maintenance", async (req, res) => {
+app.get("/getCommentsByPostId/:id", async (req, res) => {
   try {
-    const pets = await db.getPetsByFeature(req.params.aggression, req.params.energy, req.params.maintenance);
+    const comments = await db.getCommentsByPostId(req.params.id);
     res.header("Content-Type", "application/json");
-    return res.send(JSON.stringify(pets, null, 4));
+    return res.send(JSON.stringify(comments, null, 4));
   } catch (err) {
     console.log("ERROR: ", err);
     return res.status(400).send(err);
