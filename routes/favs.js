@@ -47,5 +47,33 @@ app.get("/getFavByPostId/:id", async (req, res) => {
 });
 
 // will need to add more routes probably
+app.post("/addFav", (req, res) => {
+  const input = req.body;
+  db.getFavByUserIdAndPostId(input.user_id, input.post_id).then( async(isInDB) => {
+    if (isInDB) {
+      res.send("Favourite exists already");
+    } else {
+      const newFav = {
+        user_id: input.user_id,
+        post_id: input.post_id,
+      };
+      console.log(newFav);
+      await db.addFavs(newFav);
+      res.send(newFav);
+    }
+  });
+});
+
+app.post("/removeFav", (req, res) => {
+  const input = req.body;
+  db.getFavById(input.id).then( async(isIDInDB) => {
+    if (isIDInDB) {
+      await db.deleteFav(input.id);
+      res.status(200).send("Deleted favourite successful");
+    } else {
+      res.status(500).send("Attempting to delete non-existent favourite id");
+    }
+  });
+});
 
 module.exports = app;

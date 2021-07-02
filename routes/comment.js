@@ -47,5 +47,34 @@ app.get("/getCommentsByPostId/:id", async (req, res) => {
 });
 
 // will need to add more routes probably
+app.post("/addComment", (req, res) => {
+  const input = req.body;
+  db.getCommentsByUserIdAndPostId(input.user_id, input.post_id).then( async(isInDB) => {
+    if (isInDB) {
+      res.send("Comment exists already");
+    } else {
+      const newComment = {
+        user_id: input.user_id,
+        post_id: input.post_id,
+        text: input.text,
+      };
+      console.log(newComment);
+      await db.addComments(newComment);
+      res.send(newComment);
+    }
+  });
+});
+
+app.post("/removeComment", (req, res) => {
+  const input = req.body;
+  db.getCommentsById(input.id).then( async(isIDInDB) => {
+    if (isIDInDB) {
+      await db.deleteComment(input.id);
+      res.status(200).send("Deleted comment successful");
+    } else {
+      res.status(500).send("Attempting to delete non-existent comment id");
+    }
+  });
+});
 
 module.exports = app;

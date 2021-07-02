@@ -48,4 +48,37 @@ app.get("/getPetsByFeature/:aggression/:energy/:maintenance", async (req, res) =
 
 // will need to add more routes probably
 
+//post requests
+app.post("/addPet", (req, res) => {
+  const input = req.body;
+  db.getPetsByBreed(input.breed).then( async(isBreedInDB) => {
+    if (isBreedInDB) {
+      res.send("Pet breed exists");
+    } else {
+      const newPet = {
+        breed: input.breed,
+        maintenance: input.maintenance,
+        aggression: input.aggression,
+        energy: input.energy,
+      };
+      console.log(newPet);
+
+      await db.addPets(newPet);
+      res.send(newPet);
+    }
+  });
+});
+
+app.post("/removePet", (req, res) => {
+  const input = req.body;
+  db.getPetById(input.id).then( async(isIDInDB) => {
+    if (isIDInDB) {
+      await db.deletePet(input.id);
+      res.status(200).send("Deleted pet successful");
+    } else {
+      res.status(500).send("Attempting to delete non-existent pet id");
+    }
+  });
+});
+
 module.exports = app;
