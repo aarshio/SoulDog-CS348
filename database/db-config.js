@@ -1,5 +1,6 @@
 const knex = require("knex");
 const config = require("../knexfile.js");
+const uuid = require("uuid");
 
 const db = knex(config.development); // our sqlite3 db
 
@@ -36,7 +37,14 @@ const getUserByEmail = (email) => {
 const addUser = (user) => {
   return db
     .insert(
-      [{ email: user.email, username: user.username, password: user.password }],
+      [
+        {
+          id: uuid.v4(),
+          email: user.email,
+          username: user.username,
+          password: user.password,
+        },
+      ],
       ["id"]
     )
     .into("users");
@@ -45,7 +53,7 @@ const addUser = (user) => {
 /* PETS */
 
 const getAllPets = () => {
-  // SELECT * FROM pets 
+  // SELECT * FROM pets
   return db("pets");
 };
 
@@ -60,7 +68,14 @@ const getPetById = (id) => {
 const addPets = (pet) => {
   return db
     .insert(
-      [{ breed: pet.breed, maintenance: pet.maintenance, aggression: pet.aggression, energy: pet.energy }],
+      [
+        {
+          breed: pet.breed,
+          maintenance: pet.maintenance,
+          aggression: pet.aggression,
+          energy: pet.energy,
+        },
+      ],
       ["id"]
     )
     .into("pets");
@@ -78,14 +93,14 @@ const getPetsByFeature = (aggression, energy, maintenance) => {
   // SELECT * FROM pets WHERE aggression = aggression.breed and energy = energy.breed and maintenance = maintenance.breed
   return db("pets")
     .select()
-    .where({ aggression: aggression, energy: energy, maintenance: maintenance, })
+    .where({ aggression: aggression, energy: energy, maintenance: maintenance })
     .then((pet) => pet[0]);
 };
 
 /* FAVOURITES */
 
 const getAllFavs = () => {
-  // SELECT * FROM favourites 
+  // SELECT * FROM favourites
   return db("favourites");
 };
 
@@ -115,17 +130,14 @@ const getFavByPostId = (pid) => {
 
 const addFavs = (fav) => {
   return db
-    .insert(
-      [{ user_id: fav.user_id, post_id: fav.post_id }],
-      ["id"]
-    )
+    .insert([{ user_id: fav.user_id, post_id: fav.post_id }], ["id"])
     .into("favourites");
 };
 
 /* LIKES */
 
 const getAllLikes = () => {
-  // SELECT * FROM likes 
+  // SELECT * FROM likes
   return db("likes");
 };
 
@@ -155,17 +167,14 @@ const getLikeByPostId = (pid) => {
 
 const addLikes = (like) => {
   return db
-    .insert(
-      [{ user_id: like.user_id, post_id: like.post_id }],
-      ["id"]
-    )
+    .insert([{ user_id: like.user_id, post_id: like.post_id }], ["id"])
     .into("likes");
 };
 
 /* COMMENTS */
 
 const getAllComments = () => {
-  // SELECT * FROM comments 
+  // SELECT * FROM comments
   return db("comments");
 };
 
@@ -196,7 +205,13 @@ const getCommentsByPostId = (pid) => {
 const addComments = (comment) => {
   return db
     .insert(
-      [{ user_id: comment.user_id, post_id: comment.post_id, text: comment.text }],
+      [
+        {
+          user_id: comment.user_id,
+          post_id: comment.post_id,
+          text: comment.text,
+        },
+      ],
       ["id"]
     )
     .into("comments");
@@ -205,7 +220,7 @@ const addComments = (comment) => {
 /* POSTS */
 
 const getAllPosts = () => {
-  // SELECT * FROM posts 
+  // SELECT * FROM posts
   return db("posts");
 };
 
@@ -236,13 +251,16 @@ const getPostByPetId = (pid) => {
 const addPosts = (post) => {
   return db
     .insert(
-      [{ user_id: post.user_id,
-         pet_id: post.pet_id,
-         title: post.title,
-         content: post.content, 
-         name: post.name,
-         age: post.age,
-      }],
+      [
+        {
+          user_id: post.user_id,
+          pet_id: post.pet_id,
+          title: post.title,
+          content: post.content,
+          name: post.name,
+          age: post.age,
+        },
+      ],
       ["id"]
     )
     .into("posts");
@@ -284,5 +302,4 @@ module.exports = {
   getPostsByUserId,
   getPostByPetId,
   addPosts,
-
 };
