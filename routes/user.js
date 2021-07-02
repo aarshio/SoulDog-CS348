@@ -62,7 +62,7 @@ app.post("/updateUser", (req, res) => {
       if (input.backyard) { await db.updateUserBackyard(input.id, input.backyard); }
       if (input.last_name) { await db.updateUserLastName(input.id, input.last_name); }
       if (input.first_name) { await db.updateUserFirstName(input.id, input.first_name); }
-      res.status(200).send("Updating User successful");
+      db.getUserById(input.id).then( updated_res => res.status(200).send(updated_res) )
     } else {
       res.status(500).send("Attempting to update non-existent User id");
     }

@@ -75,7 +75,7 @@ app.post("/updatePost", (req, res) => {
     if (isIDInDB) {
       if (input.title) { await db.updatePostTitle(input.id, input.title); }
       if (input.content) { await db.updatePostContent(input.id, input.content); }
-      res.status(200).send("Updating post successful");
+      db.getUserById(input.id).then( updated_res => res.status(200).send(updated_res) )
     } else {
       res.status(500).send("Attempting to update non-existent post id");
     }
