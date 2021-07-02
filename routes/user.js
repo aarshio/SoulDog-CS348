@@ -50,4 +50,35 @@ app.get("/logout", (req, res) => {
   res.status(200).send("Logged out successful");
 });
 
+app.post("/updateUser", (req, res) => {
+  const input = req.body;
+  db.getUserById(input.id).then( async(isIDInDB) => {
+    if (isIDInDB) {
+      if (input.bio) { await db.updateUserBio(input.id, input.bio); }
+      if (input.profile_pic) { await db.updateUserProfilePic(input.id, input.profile_pic); }
+      if (input.free_time) { await db.updateUserFreeTime(input.id, input.free_time); }
+      if (input.strength) { await db.updateUserStength(input.id, input.strength); }
+      if (input.energy) { await db.updateUserEnergy(input.id, input.energy); }
+      if (input.backyard) { await db.updateUserBackyard(input.id, input.backyard); }
+      if (input.last_name) { await db.updateUserLastName(input.id, input.last_name); }
+      if (input.first_name) { await db.updateUserFirstName(input.id, input.first_name); }
+      res.status(200).send("Updating User successful");
+    } else {
+      res.status(500).send("Attempting to update non-existent User id");
+    }
+  });
+});
+
+app.post("/removeUser", (req, res) => {
+  const input = req.body;
+  db.getUserById(input.id).then( async(isIDInDB) => {
+    if (isIDInDB) {
+      await db.deleteUser(input.id);
+      res.status(200).send("Deleted user successful");
+    } else {
+      res.status(500).send("Attempting to delete non-existent user id");
+    }
+  });
+});
+
 module.exports = app;
