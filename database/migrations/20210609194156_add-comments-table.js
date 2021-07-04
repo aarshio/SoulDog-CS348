@@ -4,7 +4,7 @@ exports.up = function (knex) {
       table.uuid("user_id").notNullable();
       table.foreign("user_id").references("users.id");
       table.uuid("post_id").notNullable();
-      table.foreign("post_id").references("posts.id");
+      table.foreign("post_id").references("posts.id").onDelete('CASCADE');
       table.text("text");
       table.timestamp("created_at").defaultTo(knex.fn.now());
     });
