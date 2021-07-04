@@ -8,6 +8,8 @@ exports.up = function (knex) {
     table.timestamp("created_at").defaultTo(knex.fn.now());
 
     table.unique(["breed"]);
+
+    table.index(["maintenance", "aggression", "energy"], "PetAttributeIndex");
   });
 };
 

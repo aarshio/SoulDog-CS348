@@ -4,7 +4,7 @@ exports.up = function (knex) {
     table.uuid("user_id").notNullable();
     table.foreign("user_id").references("users.id");
     table.uuid("pet_id").notNullable();
-    table.foreign("pet_id").references("pets.id");
+    table.foreign("pet_id").references("pets.id").onDelete('CASCADE');
     table.string("title");
     table.text("content");
     table.string("name");

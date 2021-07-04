@@ -18,6 +18,8 @@ exports.up = function (knex) {
     table.timestamp("created_at").defaultTo(knex.fn.now());
 
     table.unique(["email", "username"]);
+
+    table.index(["username", "password"], "UserIndex");
   });
 };
 
