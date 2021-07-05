@@ -3,38 +3,38 @@ const uuid = require("uuid");
 
 const getRandomIndex = (n) => {
   return Math.floor(Math.random() * n); // between 0 to n-1
-}
+};
 
 const generateRandomFavourites = (cb) => {
   const fakeFavourites = [];
   const NUM_FAVOURITES = 20;
   const user_ids = [
-    '1419fcef-2749-4523-b9ef-eadbc4aff1f3',
-    '7d8c1c57-2cd5-4e0b-bea8-7b4daa352187',
-    '3947318b-6a18-49d6-9bfe-bcc28586358e',
-    '26c4c582-d55e-4c57-934b-68b06eba71dd',
-    '1d20d4c2-9bbb-4b49-80a6-adb52fb517bb',
-    '42118300-8182-46aa-95c7-1aa2061ca758',
-    '69526044-05f6-4ecd-b598-65e29cdd4c53',
-    '6d8f6e74-7e96-4126-9a16-c4f5e704fc07',
-    '7170c4f2-74f7-4534-807e-cb31fdef8ac8',
-    '21ef2d5a-02c2-43ec-8e38-dcc6aaa9ec0d'  
-    ];
+    "e73df93c-5e54-4dc6-96bf-80f2cde1ecc1",
+    "c8717f1d-35a2-4369-bdb5-e17c2e2dceda",
+    "b1916a0b-340c-4e7e-83ad-7466d6d1a8c8",
+    "a9885902-9640-428a-91cc-d79870f697ed",
+    "7a3e36b2-2d71-4dd5-9a1c-3daee339fe93",
+    "7a2a8de6-9da0-4cb1-933c-4ad4eda189f4",
+    "75c0aada-1b04-485f-b419-a2f973dcbfcd",
+    "4b62ae74-1857-40b0-a945-34d6e2324aed",
+    "36078bcf-d947-4ebf-9a27-1ed0bce3af7c",
+    "2444c60c-912d-414e-b785-b4f08e4fbfed",
+  ];
   const post_ids = [
-    '12ecd697-45d1-46e7-9bd4-4e7e083391fe',
-    '6ccc7e5c-561b-4d5c-8639-e3c12841ffc1',
-    '91ffeda8-3829-4c4d-97dc-f89c1198c24a',
-    'a06ccd1b-8fd4-4a39-86b7-229f0ea4ab44',
-    'dc9facc6-da6d-4204-b2f5-1e05703ceaeb',
-    'e09ba141-e521-4de0-8659-834620ae8ed1',
-    'eb88dce3-ce4e-4225-b3f7-7f1f1c526a36'
-    ];
+    '1a3830c1-cddc-4583-86f8-1eee9aa8d522',
+    '3e0106a5-45ed-4d4d-bb9d-4b18cc383c3e',
+    '7670bd0a-046e-4092-8b99-f99af187fb42',
+    '8ca150ed-f6d4-4f87-a64c-0bd2345e68fb',
+    'e7d9536c-b79c-4c52-bf9a-c8227a54b5dc',
+    'eeff15ef-cb05-4c86-a7fb-6edfc5a92510',
+    'f74ac8ec-593b-4caa-96dc-b883c7a09eb8',  
+  ];
   for (let i = 0; i < NUM_FAVOURITES; ++i) {
     const favourite = {
       id: uuid.v4(),
       user_id: user_ids[getRandomIndex(10)],
-      post_id: post_ids[getRandomIndex(7)]
-    }
+      post_id: post_ids[getRandomIndex(7)],
+    };
     fakeFavourites.push(favourite);
   }
   return cb(fakeFavourites);
@@ -42,12 +42,12 @@ const generateRandomFavourites = (cb) => {
 
 exports.seed = function (knex) {
   // Deletes ALL existing entries
-  // return knex("favourites")
-  //   // .del()
-  //   .then(function () {
-  //     // Inserts seed entries
-  //     return generateRandomFavourites((fakeFavourites) =>
-  //       knex("favourites").insert(fakeFavourites)
-  //     );
-  //   });
+  return knex("favourites")
+    .del()
+    .then(function () {
+      // Inserts seed entries
+      return generateRandomFavourites((fakeFavourites) =>
+        knex("favourites").insert(fakeFavourites)
+      );
+    });
 };

@@ -9,26 +9,26 @@ const generateRandomPosts = (cb) => {
   const fakePosts = [];
   const NUM_POSTS = 7;
   const user_ids = [
-    '1419fcef-2749-4523-b9ef-eadbc4aff1f3',
-    '7d8c1c57-2cd5-4e0b-bea8-7b4daa352187',
-    '3947318b-6a18-49d6-9bfe-bcc28586358e',
-    '26c4c582-d55e-4c57-934b-68b06eba71dd',
-    '1d20d4c2-9bbb-4b49-80a6-adb52fb517bb',
-    '42118300-8182-46aa-95c7-1aa2061ca758',
-    '69526044-05f6-4ecd-b598-65e29cdd4c53',
-    '6d8f6e74-7e96-4126-9a16-c4f5e704fc07',
-    '7170c4f2-74f7-4534-807e-cb31fdef8ac8',
-    '21ef2d5a-02c2-43ec-8e38-dcc6aaa9ec0d'  
-    ];
+    'e73df93c-5e54-4dc6-96bf-80f2cde1ecc1',
+    'c8717f1d-35a2-4369-bdb5-e17c2e2dceda',
+    'b1916a0b-340c-4e7e-83ad-7466d6d1a8c8',
+    'a9885902-9640-428a-91cc-d79870f697ed',
+    '7a3e36b2-2d71-4dd5-9a1c-3daee339fe93',
+    '7a2a8de6-9da0-4cb1-933c-4ad4eda189f4',
+    '75c0aada-1b04-485f-b419-a2f973dcbfcd',
+    '4b62ae74-1857-40b0-a945-34d6e2324aed',
+    '36078bcf-d947-4ebf-9a27-1ed0bce3af7c',
+    '2444c60c-912d-414e-b785-b4f08e4fbfed'
+	];
   const pet_ids = [
-    '240a0573-2847-45dd-bff5-7a1be4897b0c',
-    '6c97fcd3-6af8-432e-a755-71b39f3cd85a',
-    'a66c5371-7cb6-48da-a2bf-8cef23275ef6',
-    'ca793749-dfcd-4cfb-babb-2e2ea2371d23',
-    'cf480757-9a7a-4ab9-a742-033dd89f7de3',
-    'd21065ba-a9bf-4c58-87fd-ec5bd75c9438',
-    'dcd64261-eff0-4928-8488-24ead51f3fce'
-    ]
+    'abd8491b-f85c-48a1-ab6f-50706e6917e9',
+    'a7bce8b7-512d-47d5-9ba1-4c546ce28501',
+    '99b80972-d473-452e-a6ac-d52966a327bb',
+    '71490d31-76cc-431c-b7ef-97f21ca39cea',
+    '704882f6-36b4-427a-b794-eee9e3780cd3',
+    '668167b9-bb16-4c3d-9877-139b0b01329c',
+    '5e1a52e2-b456-4552-810f-085061c46a68'
+  ]
   for (let i = 0; i < NUM_POSTS; ++i) {
     const post = {
       id: uuid.v4(),
@@ -45,13 +45,13 @@ const generateRandomPosts = (cb) => {
 };
 
 exports.seed = function (knex) {
-  // // Deletes ALL existing entries
-  // return knex("posts")
-  //   // .del()
-  //   .then(function () {
-  //     // Inserts seed entries
-  //     return generateRandomPosts((fakePosts) =>
-  //       knex("posts").insert(fakePosts)
-  //     );
-  //   });
-};
+  // Deletes ALL existing entries
+//   return knex("posts")
+//     .del()
+//     .then(function () {
+//       // Inserts seed entries
+//       return generateRandomPosts((fakePosts) =>
+//         knex("posts").insert(fakePosts)
+//       );
+//     });
+// };
