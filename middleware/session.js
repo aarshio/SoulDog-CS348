@@ -4,6 +4,7 @@ const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const SECRET = "shhh";
 
@@ -18,6 +19,7 @@ app.use(
   })
 );
 
+app.use(cors());
 app.use(cookieParser(SECRET));
 app.use(passport.initialize());
 app.use(passport.session());

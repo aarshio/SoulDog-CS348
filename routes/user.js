@@ -19,7 +19,8 @@ app.get("/getAllUsers", async (req, res) => {
 app.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) throw err;
-    if (!user) res.send("No user exists");
+    if (!user)
+      res.status(500).send("No user exists with this email and password");
     else {
       req.logIn(user, (err) => {
         if (err) throw err;
@@ -52,17 +53,35 @@ app.get("/logout", (req, res) => {
 
 app.post("/updateUser", (req, res) => {
   const input = req.body;
-  db.getUserById(input.id).then( async(isIDInDB) => {
+  db.getUserById(input.id).then(async (isIDInDB) => {
     if (isIDInDB) {
-      if (input.bio) { await db.updateUserBio(input.id, input.bio); }
-      if (input.profile_pic) { await db.updateUserProfilePic(input.id, input.profile_pic); }
-      if (input.free_time) { await db.updateUserFreeTime(input.id, input.free_time); }
-      if (input.strength) { await db.updateUserStength(input.id, input.strength); }
-      if (input.energy) { await db.updateUserEnergy(input.id, input.energy); }
-      if (input.backyard) { await db.updateUserBackyard(input.id, input.backyard); }
-      if (input.last_name) { await db.updateUserLastName(input.id, input.last_name); }
-      if (input.first_name) { await db.updateUserFirstName(input.id, input.first_name); }
-      db.getUserById(input.id).then( updated_res => res.status(200).send(updated_res) )
+      if (input.bio) {
+        await db.updateUserBio(input.id, input.bio);
+      }
+      if (input.profile_pic) {
+        await db.updateUserProfilePic(input.id, input.profile_pic);
+      }
+      if (input.free_time) {
+        await db.updateUserFreeTime(input.id, input.free_time);
+      }
+      if (input.strength) {
+        await db.updateUserStength(input.id, input.strength);
+      }
+      if (input.energy) {
+        await db.updateUserEnergy(input.id, input.energy);
+      }
+      if (input.backyard) {
+        await db.updateUserBackyard(input.id, input.backyard);
+      }
+      if (input.last_name) {
+        await db.updateUserLastName(input.id, input.last_name);
+      }
+      if (input.first_name) {
+        await db.updateUserFirstName(input.id, input.first_name);
+      }
+      db.getUserById(input.id).then((updated_res) =>
+        res.status(200).send(updated_res)
+      );
     } else {
       res.status(500).send("Attempting to update non-existent User id");
     }
@@ -71,7 +90,7 @@ app.post("/updateUser", (req, res) => {
 
 app.post("/removeUser", (req, res) => {
   const input = req.body;
-  db.getUserById(input.id).then( async(isIDInDB) => {
+  db.getUserById(input.id).then(async (isIDInDB) => {
     if (isIDInDB) {
       await db.deleteUser(input.id);
       res.status(200).send("Deleted user successful");

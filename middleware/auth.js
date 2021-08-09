@@ -14,14 +14,18 @@ passport.deserializeUser((id, cb) => {
 });
 
 passport.use(
-  new passportLocal((username, password, done) => {
-    db.getUserByUsername(username)
+  new passportLocal((email, password, done) => {
+    db.getUserByEmail(email)
       .then((user) => {
+        console.log(user);
         if (!user) return done(null, false);
-        return bcrypt
+        bcrypt
           .compare(password, user.password)
           .then((res) => {
-            return done(null, user);
+            if (res) {
+              return done(null, user);
+            }
+            return done(null, false);
           })
           .catch((err) => {
             return done(null, false);

@@ -52,83 +52,64 @@ const addUser = (user) => {
 
 const updateUserBio = (id, bio) => {
   // UPDATE users SET bio = params.bio WHERE id = params.id
-  return db("users")
-    .where({ id: id })
-    .update({
-      bio: bio,
-    })
+  return db("users").where({ id: id }).update({
+    bio: bio,
+  });
 };
 
 const updateUserFirstName = (id, first_name) => {
   // UPDATE users SET first_name = params.first_name WHERE id = params.id
-  return db("users")
-    .where({ id: id })
-    .update({
-      first_name: first_name,
-    })
+  return db("users").where({ id: id }).update({
+    first_name: first_name,
+  });
 };
 
 const updateUserLastName = (id, last_name) => {
   // UPDATE users SET last_name = params.last_name WHERE id = params.id
-  return db("users")
-    .where({ id: id })
-    .update({
-      last_name: last_name,
-    })
+  return db("users").where({ id: id }).update({
+    last_name: last_name,
+  });
 };
 
 const updateUserProfilePic = (id, profile_pic) => {
   // UPDATE users SET profile_pic = params.profile_pic WHERE id = params.id
-  return db("users")
-    .where({ id: id })
-    .update({
-      profile_pic: profile_pic,
-    })
+  return db("users").where({ id: id }).update({
+    profile_pic: profile_pic,
+  });
 };
-
 
 const updateUserEnergy = (id, energy) => {
   // UPDATE users SET energy = params.energy WHERE id = params.id
-  return db("users")
-    .where({ id: id })
-    .update({
-      energy: energy,
-    })
+  return db("users").where({ id: id }).update({
+    energy: energy,
+  });
 };
 
 const updateUserStength = (id, strength) => {
   // UPDATE users SET strength = params.strength WHERE id = params.id
-  return db("users")
-    .where({ id: id })
-    .update({
-      strength: strength,
-    })
+  return db("users").where({ id: id }).update({
+    strength: strength,
+  });
 };
 
 const updateUserFreeTime = (id, free_time) => {
   // UPDATE users SET free_time = params.free_time WHERE id = params.id
-  return db("users")
-    .where({ id: id })
-    .update({
-      free_time: free_time,
-    })
+  return db("users").where({ id: id }).update({
+    free_time: free_time,
+  });
 };
 
 const updateUserBackyard = (id, backyard) => {
   // UPDATE users SET backyard = params.backyard WHERE id = params.id
-  return db("users")
-    .where({ id: id })
-    .update({
-      backyard: backyard,
-    })
+  return db("users").where({ id: id }).update({
+    backyard: backyard,
+  });
 };
 
 const deleteUser = (id) => {
   // delete from users where id = params.id
-  return db("users")
-    .where({ id: id })
-    .del()
-}
+  return db("users").where({ id: id }).del();
+};
 
 /* PETS */
 
@@ -180,10 +161,8 @@ const getPetsByFeature = (aggression, energy, maintenance) => {
 
 const deletePet = (id) => {
   // delete from pets where id = params.id
-  return db("pets")
-    .where({ id: id })
-    .del()
-}
+  return db("pets").where({ id: id }).del();
+};
 
 /* FAVOURITES */
 
@@ -226,16 +205,17 @@ const getFavByUserIdAndPostId = (uid, pid) => {
 
 const addFavs = (fav) => {
   return db
-    .insert([{ id: uuid.v4(), user_id: fav.user_id, post_id: fav.post_id }], ["id"])
+    .insert(
+      [{ id: uuid.v4(), user_id: fav.user_id, post_id: fav.post_id }],
+      ["id"]
+    )
     .into("favourites");
 };
 
 const deleteFav = (id) => {
   // delete from favourites where id = params.id
-  return db("favourites")
-    .where({ id: id })
-    .del()
-}
+  return db("favourites").where({ id: id }).del();
+};
 
 /* LIKES */
 
@@ -278,16 +258,17 @@ const getLikeByUserIdAndPostId = (uid, pid) => {
 
 const addLikes = (like) => {
   return db
-    .insert([{ id: uuid.v4(), user_id: like.user_id, post_id: like.post_id }], ["id"])
+    .insert(
+      [{ id: uuid.v4(), user_id: like.user_id, post_id: like.post_id }],
+      ["id"]
+    )
     .into("likes");
 };
 
 const deleteLike = (id) => {
   // delete from likes where id = params.id
-  return db("likes")
-    .where({ id: id })
-    .del()
-}
+  return db("likes").where({ id: id }).del();
+};
 
 /* COMMENTS */
 
@@ -317,7 +298,7 @@ const getCommentsByPostId = (pid) => {
   return db("comments")
     .select()
     .where({ post_id: pid })
-    .then((comment) => comment[0]);
+    .then((comment) => comment);
 };
 
 const getCommentsByUserIdAndPostId = (uid, pid) => {
@@ -346,10 +327,8 @@ const addComments = (comment) => {
 
 const deleteComment = (id) => {
   // delete from comments where id = params.id
-  return db("comments")
-    .where({ id: id })
-    .del()
-}
+  return db("comments").where({ id: id }).del();
+};
 
 /* POSTS */
 
@@ -411,28 +390,22 @@ const addPosts = (post) => {
 
 const updatePostTitle = (id, title) => {
   // UPDATE posts SET title = params.title WHERE id = params.id
-  return db("posts")
-    .where({ id: id })
-    .update({
-      title: title,
-    })
+  return db("posts").where({ id: id }).update({
+    title: title,
+  });
 };
 
 const updatePostContent = (id, content) => {
   // UPDATE posts SET content = params.content  WHERE id = params.id
-  return db("posts")
-    .where({ id: id })
-    .update({
-      content: content,
-    })
+  return db("posts").where({ id: id }).update({
+    content: content,
+  });
 };
 
 const deletePost = (id) => {
   // delete from posts where id = params.id
-  return db("posts")
-    .where({ id: id })
-    .del()
-}
+  return db("posts").where({ id: id }).del();
+};
 
 module.exports = {
   allUsers,
@@ -490,5 +463,4 @@ module.exports = {
   updatePostTitle,
   updatePostContent,
   deletePost,
-
 };
