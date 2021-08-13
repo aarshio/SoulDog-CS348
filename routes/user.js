@@ -16,6 +16,17 @@ app.get("/getAllUsers", async (req, res) => {
   }
 });
 
+app.get("/getUserById", async (req, res) => {
+  try {
+    const user = await db.getUserById(req.UserId);
+    res.header("Content-Type", "application/json");
+    return res.send(JSON.stringify(user, null, 4));
+  } catch (err) {
+    console.log("ERROR: ", err);
+    return res.status(400).send(err);
+  }
+});
+
 app.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) throw err;
