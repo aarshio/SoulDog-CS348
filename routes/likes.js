@@ -70,8 +70,8 @@ app.post("/addLike", (req, res) => {
         post_id: input.post_id,
       };
       console.log(newLike);
-      await db.addLikes(newLike);
-      res.send(newLike);
+      const answer = await db.addLikes(newLike);
+      res.send(answer);
     }
   });
 });

@@ -126,21 +126,22 @@ const getPetById = (id) => {
     .then((pet) => pet[0]);
 };
 
-const addPets = (pet) => {
-  return db
+const addPets = async (pet) => {
+  const pet_id = uuid.v4();
+  await db
     .insert(
       [
         {
-          id: uuid.v4(),
+          id: pet_id,
           breed: pet.breed,
           maintenance: pet.maintenance,
           aggression: pet.aggression,
           energy: pet.energy,
         },
       ],
-      ["id"]
     )
     .into("pets");
+  return pet_id;
 };
 
 const getPetsByBreed = (breed) => {
@@ -237,7 +238,7 @@ const getLikeByUserId = (uid) => {
   return db("likes")
     .select()
     .where({ user_id: uid })
-    .then((like) => like[0]);
+    .then((like) => like);
 };
 
 const getLikeByPostId = (pid) => {
@@ -245,7 +246,7 @@ const getLikeByPostId = (pid) => {
   return db("likes")
     .select()
     .where({ post_id: pid })
-    .then((like) => like[0]);
+    .then((like) => like);
 };
 
 const getLikeByUserIdAndPostId = (uid, pid) => {
@@ -256,13 +257,14 @@ const getLikeByUserIdAndPostId = (uid, pid) => {
     .then((like) => like[0]);
 };
 
-const addLikes = (like) => {
-  return db
+const addLikes = async (like) => {
+  const like_id = uuid.v4();
+  await db
     .insert(
-      [{ id: uuid.v4(), user_id: like.user_id, post_id: like.post_id }],
-      ["id"]
+      [{ id: like_id, user_id: like.user_id, post_id: like.post_id }],
     )
     .into("likes");
+  return like_id;
 };
 
 const deleteLike = (id) => {

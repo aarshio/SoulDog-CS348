@@ -63,8 +63,8 @@ app.post("/addPet", (req, res) => {
       };
       console.log(newPet);
 
-      await db.addPets(newPet);
-      res.send(newPet);
+      const answer = await db.addPets(newPet);
+      res.send(answer);
     }
   });
 });
