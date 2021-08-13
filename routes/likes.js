@@ -46,6 +46,17 @@ app.get("/getLikeByPostId/:id", async (req, res) => {
   }
 });
 
+app.get("/getLikeByUserIdAndPostId/:uid/:pid", async (req, res) => {
+  try {
+    const likes = await db.getLikeByUserIdAndPostId(req.params.uid, req.params.pid);
+    res.header("Content-Type", "application/json");
+    return res.send(JSON.stringify(likes, null, 4));
+  } catch (err) {
+    console.log("ERROR: ", err);
+    return res.status(400).send(err);
+  }
+});
+
 // will need to add more routes probably
 
 app.post("/addLike", (req, res) => {
