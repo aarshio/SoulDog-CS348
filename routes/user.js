@@ -16,9 +16,9 @@ app.get("/getAllUsers", async (req, res) => {
   }
 });
 
-app.get("/getUserById", async (req, res) => {
+app.get("/getUserById/:id", async (req, res) => {
   try {
-    const user = await db.getUserById(req.UserId);
+    const user = await db.getUserById(req.params.id);
     res.header("Content-Type", "application/json");
     return res.send(JSON.stringify(user, null, 4));
   } catch (err) {

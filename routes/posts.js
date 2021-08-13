@@ -33,8 +33,14 @@ app.get("/getPostById/:id", async (req, res) => {
 app.get("/getPostsByUserId/:id", async (req, res) => {
   try {
     const posts = await db.getPostsByUserId(req.params.id);
+    let arr = [];
+    for (let post of posts) {
+      const pet = await db.getPetById(post.pet_id);
+      delete pet.id;
+      arr.push({ ...post, ...pet });
+    }
     res.header("Content-Type", "application/json");
-    return res.send(JSON.stringify(posts, null, 4));
+    return res.send(JSON.stringify(arr, null, 4));
   } catch (err) {
     console.log("ERROR: ", err);
     return res.status(400).send(err);
@@ -69,7 +75,7 @@ app.post("/addPost", (req, res) => {
           name: input.name,
           age: input.age,
         };
-        console.log(newPost);
+        // console.log(newPost);
         await db.addPosts(newPost);
         res.send(newPost);
       }

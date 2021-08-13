@@ -129,17 +129,15 @@ const getPetById = (id) => {
 const addPets = async (pet) => {
   const pet_id = uuid.v4();
   await db
-    .insert(
-      [
-        {
-          id: pet_id,
-          breed: pet.breed,
-          maintenance: pet.maintenance,
-          aggression: pet.aggression,
-          energy: pet.energy,
-        },
-      ],
-    )
+    .insert([
+      {
+        id: pet_id,
+        breed: pet.breed,
+        maintenance: pet.maintenance,
+        aggression: pet.aggression,
+        energy: pet.energy,
+      },
+    ])
     .into("pets");
   return pet_id;
 };
@@ -185,7 +183,7 @@ const getFavByUserId = (uid) => {
   return db("favourites")
     .select()
     .where({ user_id: uid })
-    .then((fav) => fav[0]);
+    .then((fav) => fav);
 };
 
 const getFavByPostId = (pid) => {
@@ -206,16 +204,13 @@ const getFavByUserIdAndPostId = (uid, pid) => {
 
 const addFavs = (fav) => {
   return db
-    .insert(
-      [{ id: uuid.v4(), user_id: fav.user_id, post_id: fav.post_id }],
-      ["id"]
-    )
+    .insert([{ id: uuid.v4(), user_id: fav.user_id, post_id: fav.post_id }])
     .into("favourites");
 };
 
-const deleteFav = (id) => {
+const deleteFav = (user_id, post_id) => {
   // delete from favourites where id = params.id
-  return db("favourites").where({ id: id }).del();
+  return db("favourites").where({ user_id: user_id, post_id: post_id }).del();
 };
 
 /* LIKES */
@@ -260,9 +255,7 @@ const getLikeByUserIdAndPostId = (uid, pid) => {
 const addLikes = async (like) => {
   const like_id = uuid.v4();
   await db
-    .insert(
-      [{ id: like_id, user_id: like.user_id, post_id: like.post_id }],
-    )
+    .insert([{ id: like_id, user_id: like.user_id, post_id: like.post_id }])
     .into("likes");
   return like_id;
 };
@@ -352,7 +345,7 @@ const getPostsByUserId = (uid) => {
   return db("posts")
     .select()
     .where({ user_id: uid })
-    .then((post) => post[0]);
+    .then((post) => post);
 };
 
 const getPostByPetId = (pid) => {
