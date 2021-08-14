@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const _ = require("lodash");
 const dotenv = require("dotenv");
+var morgan = require("morgan");
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -17,6 +18,7 @@ const postRoutes = require("./routes/posts");
 
 // Middleware
 app.use(middleware);
+app.use(morgan("combined"));
 
 const isLoggedIn = (req, res, next) => {
   if (req.user) next();

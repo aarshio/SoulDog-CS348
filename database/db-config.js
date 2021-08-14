@@ -1,6 +1,7 @@
 const knex = require("knex");
 const config = require("../knexfile.js");
 const uuid = require("uuid");
+const faker = require("faker");
 
 const db = knex(config.development); // our sqlite3 db
 
@@ -34,20 +35,29 @@ const getUserByEmail = (email) => {
     .then((user) => user[0]);
 };
 
-const addUser = (user) => {
-  return db
-    .insert(
-      [
-        {
-          id: uuid.v4(),
-          email: user.email,
-          username: user.username,
-          password: user.password,
-        },
-      ],
-      ["id"]
-    )
-    .into("users");
+const scale_level = ["Low", "Medium", "High"];
+const scale_size = ["Small", "Medium", "Large"];
+const getRandomIndex = (n) => {
+  return Math.floor(Math.random() * n); // between 0 to n-1
+};
+
+const addUser = async (user) => {
+  const add = {
+    id: uuid.v4(),
+    first_name: user.first,
+    last_name: user.last,
+    profile_pic: faker.internet.avatar(),
+    email: user.email,
+    username: user.username,
+    password: user.password,
+    username: user.username,
+    // energy: scale_level[getRandomIndex(3)],
+    // strength: scale_level[getRandomIndex(3)],
+    // free_time: scale_level[getRandomIndex(3)],
+    // backyard: scale_size[getRandomIndex(3)],
+  };
+  await db.insert([add]).into("users");
+  return add;
 };
 
 const updateUserBio = (id, bio) => {

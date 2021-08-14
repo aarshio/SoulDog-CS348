@@ -56,6 +56,7 @@ app.post("/getFavByUserIdAndPostId", (req, res) => {
 app.get("/getFavByPostId/:id", async (req, res) => {
   try {
     const favs = await db.getFavByPostId(req.params.id);
+    console.log("YPPP", favs);
     res.header("Content-Type", "application/json");
     return res.send(JSON.stringify(favs, null, 4));
   } catch (err) {
@@ -67,6 +68,7 @@ app.get("/getFavByPostId/:id", async (req, res) => {
 // will need to add more routes probably
 app.post("/addFav", (req, res) => {
   const input = req.body;
+  console.log(input);
   db.getFavByUserIdAndPostId(input.user_id, input.post_id).then(
     async (isInDB) => {
       // console.log(72, isInDB);

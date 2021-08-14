@@ -62,9 +62,11 @@ app.get("/getPostByPetId/:id", async (req, res) => {
 
 app.post("/addPost", (req, res) => {
   const input = req.body;
+  console.log(input);
   db.getPostByPetIdAndUserId(input.user_id, input.pet_id).then(
     async (isInDB) => {
       if (isInDB) {
+        console.log("no");
         res.send("Post exists already");
       } else {
         const newPost = {
@@ -75,7 +77,7 @@ app.post("/addPost", (req, res) => {
           name: input.name,
           age: input.age,
         };
-        // console.log(newPost);
+        console.log(newPost);
         await db.addPosts(newPost);
         res.send(newPost);
       }

@@ -46,13 +46,17 @@ app.post("/register", (req, res) => {
     if (user) res.send("User exists");
     if (!user) {
       const newUser = {
+        first: req.body.first,
+        last: req.body.last,
+        username: req.body.username,
         email: req.body.email,
         username: req.body.username,
         password: bcrypt.hashSync(req.body.password, 1),
       };
-      console.log(newUser);
-      await db.addUser(newUser);
-      res.send(_.omit(newUser, "password"));
+
+      const ans = await db.addUser(newUser);
+      console.log(ans);
+      res.send(_.omit(ans, "password"));
     }
   });
 });
